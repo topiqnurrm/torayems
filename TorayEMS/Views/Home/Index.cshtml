@@ -1,0 +1,63 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="mb-4">Dashboard</h1>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 toray-card">
+            <div class="card-body">
+                <h6 class="text-muted">Total Karyawan</h6>
+                <h2 class="fw-bold">@Model.TotalEmployees</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 toray-card">
+            <div class="card-body">
+                <h6 class="text-muted">Karyawan Aktif</h6>
+                <h2 class="fw-bold text-success">@Model.TotalActiveEmployees</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 toray-card">
+            <div class="card-body">
+                <h6 class="text-muted">Total Departemen</h6>
+                <h2 class="fw-bold">@Model.TotalDepartments</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white">
+        <strong>Jumlah Karyawan per Departemen</strong>
+        <span class="text-muted small">(hasil query stored procedure sp_Dashboard_EmployeeCountByDepartment)</span>
+    </div>
+    <div class="card-body">
+        @if (!Model.EmployeeCountByDepartment.Any())
+        {
+            <p class="text-muted mb-0">Belum ada data.</p>
+        }
+        else
+        {
+            foreach (var dept in Model.EmployeeCountByDepartment)
+            {
+                var maxCount = Model.EmployeeCountByDepartment.Max(d => d.EmployeeCount);
+                var percentage = maxCount == 0 ? 0 : (dept.EmployeeCount * 100 / maxCount);
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>@dept.DepartmentName</span>
+                        <span class="fw-bold">@dept.EmployeeCount</span>
+                    </div>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar toray-progress-bar" role="progressbar" style="width: @(percentage)%"></div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

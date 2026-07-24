@@ -1,0 +1,30 @@
+@model Department
+@{
+    ViewData["Title"] = "Hapus Departemen";
+}
+
+<h1 class="mb-4 text-danger">Hapus Departemen</h1>
+
+<p>Apakah Anda yakin ingin menghapus departemen berikut?</p>
+
+<div class="card shadow-sm border-0 border-start border-danger border-4" style="max-width: 600px;">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Nama Departemen</dt>
+            <dd class="col-sm-8">@Model.DepartmentName</dd>
+
+            <dt class="col-sm-4">Deskripsi</dt>
+            <dd class="col-sm-8">@Model.Description</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="alert alert-warning mt-3" style="max-width: 600px;">
+    Catatan: penghapusan akan ditolak oleh database (stored procedure) apabila departemen ini masih memiliki karyawan terkait, untuk menjaga integritas data (foreign key constraint).
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="DepartmentId" />
+    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Batal</a>
+</form>

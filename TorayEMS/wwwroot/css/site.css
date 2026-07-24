@@ -1,0 +1,36 @@
+:root {
+    --toray-blue: #003a70;
+    --toray-blue-dark: #002850;
+    --toray-accent: #f5a623;
+}
+
+body {
+    background-color: #f4f6f9;
+}
+
+.toray-navbar {
+    background-color: var(--toray-blue);
+}
+
+.toray-btn-primary {
+    background-color: var(--toray-blue);
+    color: #fff;
+    border: none;
+}
+
+.toray-btn-primary:hover {
+    background-color: var(--toray-blue-dark);
+    color: #fff;
+}
+
+.toray-card {
+    border-left: 4px solid var(--toray-blue);
+}
+
+.toray-progress-bar {
+    background-color: var(--toray-blue);
+}
+
+.footer {
+    background-color: #fff;
+}

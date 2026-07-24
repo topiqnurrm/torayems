@@ -1,0 +1,58 @@
+@model List<Employee>
+@{
+    ViewData["Title"] = "Data Karyawan";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Data Karyawan</h1>
+    <a asp-action="Create" class="btn toray-btn-primary">+ Tambah Karyawan</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle bg-white shadow-sm">
+        <thead class="table-light">
+            <tr>
+                <th>Nama Lengkap</th>
+                <th>Email</th>
+                <th>Jabatan</th>
+                <th>Departemen</th>
+                <th>Tanggal Masuk</th>
+                <th>Status</th>
+                <th class="text-end">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-4">Belum ada data karyawan.</td>
+                </tr>
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Position</td>
+                    <td>@item.DepartmentName</td>
+                    <td>@item.HireDate.ToString("dd MMM yyyy")</td>
+                    <td>
+                        @if (item.IsActive)
+                        {
+                            <span class="badge bg-success">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Non-aktif</span>
+                        }
+                    </td>
+                    <td class="text-end">
+                        <a asp-action="Details" asp-route-id="@item.EmployeeId" class="btn btn-sm btn-outline-secondary">Detail</a>
+                        <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-sm btn-outline-danger">Hapus</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
