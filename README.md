@@ -1,18 +1,3 @@
-# Toray EMS — Employee Management System
-
-Project demo **ASP.NET Core 8 (C#)** yang dibuat untuk latihan/portofolio melamar posisi
-**IT Supervisor** di **PT Indonesia Toray Synthetics**. Project ini sengaja dirancang untuk
-mencakup semua poin di *Job Description* & *Requirements* lowongan tersebut:
-
-| Requirement di lowongan                         | Diimplementasikan sebagai |
-|--------------------------------------------------|----------------------------|
-| Web application dengan C# & .NET                 | ASP.NET Core 8 MVC |
-| API & aplikasi berbasis MVC                       | Web API Controller (`/api/employees`, `/api/departments`) + MVC Controller (Views) |
-| Mengelola & optimasi SQL Server + Stored Procedure| Semua akses data lewat ADO.NET (`SqlCommand`) yang memanggil Stored Procedure, bukan Entity Framework |
-| Pemahaman konsep RDBMS                            | Relasi 1-ke-banyak `Departments` → `Employees`, foreign key, unique constraint, index |
-| Troubleshooting & problem solving                 | Validasi input, error handling, dan pencegahan hapus data yang masih berelasi |
-
----
 
 ## 1. Fitur
 
@@ -130,24 +115,3 @@ Contoh body untuk `POST /api/employees`:
   "isActive": true
 }
 ```
-
----
-
-## 5. Catatan Teknis / Kenapa Pakai ADO.NET + Stored Procedure (bukan Entity Framework)?
-
-Requirement lowongan secara eksplisit menyebut *"Manage and optimize SQL Server databases and
-Stored Procedures"* dan *"Good knowledge of SQL Server and Stored Procedures"*. Karena itu, layer
-`Data/` di project ini sengaja ditulis manual dengan `Microsoft.Data.SqlClient` yang memanggil
-stored procedure (`sp_Employee_GetAll`, `sp_Employee_Insert`, dst), bukan lewat ORM seperti
-Entity Framework. Ini untuk menunjukkan pemahaman langsung terhadap SQL Server, parameterized
-query (aman dari SQL Injection), dan cara kerja stored procedure — sesuai dengan yang dicari
-di posisi ini.
-
-Silakan dikembangkan lebih lanjut sesuai kebutuhan, misalnya: menambahkan fitur login/otentikasi,
-paging & pencarian di halaman index, atau logging dengan Serilog — untuk menambah nilai portofolio.
-
----
-
-## 6. Lisensi
-Project ini dibuat untuk keperluan belajar dan portofolio pribadi (bukan produk resmi PT Indonesia
-Toray Synthetics).

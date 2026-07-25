@@ -41,12 +41,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-else
-{
-    // Swagger hanya diaktifkan di mode Development
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Toray EMS API v1"));
-}
+
+// Swagger tetap aktif di semua environment (termasuk Production)
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Toray EMS API v1"));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
